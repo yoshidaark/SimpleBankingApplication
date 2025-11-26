@@ -32,8 +32,6 @@ namespace SimpleBankingApplication
         private void Receipt_Load(object sender, EventArgs e)
         {
             AccountManagementClass AMC = new AccountManagementClass();
-            //lblSenderUsername.Text = Account.FindData(AMC.Search(Sender.ToString()), 1);
-            //lblReceiverUsername.Text = Account.FindData(AMC.Search(Receiver.ToString()), 1);
 
             lblAmount.Text = "₱ " + Amount.ToString("F2");
             lblReceiverNumber.Text = Receiver.ToString();

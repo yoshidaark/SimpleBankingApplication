@@ -38,10 +38,10 @@
             // 
             this.dataGVTransactionHistory.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGVTransactionHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGVTransactionHistory.ColumnHeadersVisible = false;
             this.dataGVTransactionHistory.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(112)))), ((int)(((byte)(255)))));
             this.dataGVTransactionHistory.Location = new System.Drawing.Point(29, 28);
             this.dataGVTransactionHistory.Name = "dataGVTransactionHistory";
+            this.dataGVTransactionHistory.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGVTransactionHistory.Size = new System.Drawing.Size(482, 235);
             this.dataGVTransactionHistory.TabIndex = 0;
             this.dataGVTransactionHistory.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGVTransactionHistory_CellContentClick);

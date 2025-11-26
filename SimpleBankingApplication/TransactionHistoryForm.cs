@@ -17,42 +17,36 @@ namespace SimpleBankingApplication
         public TransactionHistoryForm()
         {
             InitializeComponent();
-            //transactionLog = History();
+            History();
             linkMainMenu.LinkClicked += new LinkLabelLinkClickedEventHandler(linkMainMenu_LinkClicked);
         }
 
-       /* private List<TransactionHistoryClass> History()
+        private void History()
         {
-            var list = new List<TransactionHistoryClass>();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Transaction ID", typeof(int));
+            dt.Columns.Add("Amount", typeof(decimal));
+            dt.Columns.Add("Sender", typeof(int));
+            dt.Columns.Add("Receiver", typeof(int));
+            dt.Columns.Add("Date", typeof(string));
+          
+            var repo = new dbRepo(Account.conn);
+            var history = repo.getTransactionHistory(Account.number.ToString());
 
-            try {
-                Account account = new Account();
-                string filePath = account.TransactionHistory(Account.number.ToString());
-                using (StreamReader reader = new StreamReader(filePath))
-                {
-                    while (!reader.EndOfStream)
-                    {
-                        var line = reader.ReadLine();
-                        var values = line.Split(',');
-                        var transactionHistory = new TransactionHistoryClass
-                        {
-                            Amount = values[0],
-                            Sender = values[1],
-                            Receiver = values[2],
-                            Date = values[3]
-                        };
-                        list.Add(transactionHistory);
-                    }
-                }
-            }
-            catch (Exception ex)
+            foreach (var item in history)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                var row = dt.NewRow();
+                row["Transaction ID"] = item.transactionId;
+                row["Amount"] = item.amount;
+                row["Sender"] = item.senderNumber;
+                row["Receiver"] = item.receiverNumber;
+                row["Date"] = item.date.ToString("g");
+                dt.Rows.Add(row);
             }
-
-            return list;
+            this.dataGVTransactionHistory.DataSource = dt;
+            this.dataGVTransactionHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-       */
+       
 
         private void dataGVTransactionHistory_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -66,9 +60,6 @@ namespace SimpleBankingApplication
 
         private void TransactionHistoryForm_Load(object sender, EventArgs e)
         {
-            //var history = this.transactionLog;
-            //dataGVTransactionHistory.DataSource = history;
-            //dataGVTransactionHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             
         }
 

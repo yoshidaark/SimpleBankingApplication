@@ -222,32 +222,44 @@ namespace Accounts
             }
         }
 
-        public dbAccount getTransactionHistory(string number) {
+        public List<dbAccount> getTransactionHistory(string number) {
+            var transactions = new List<dbAccount>();
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string tableName = $"TransactionHistory_{number}";
                 string query = $@"
-                    SELECT Id, Amount, Sender, Receiver, Date FROM {tableName}";
+                    SELECT Id, Amount, Sender, Receiver, Date
+                    FROM {tableName}
+                    ORDER BY Date DESC";
                 using (var command = new SqlCommand(query, connection))
+                using (var reader = command.ExecuteReader())
                 {
-                    using (var reader = command.ExecuteReader())
+                    long rowIndex = 0;
+                    while (reader.Read())
                     {
-                        if (reader.Read())
+                        rowIndex++;
+                        try
                         {
-                            return new dbAccount
+                            transactions.Add(new dbAccount
                             {
-                                transactionId = SafeGetInt32(reader, 0, 1),
-                                amount = SafeGetDecimal(reader, 1, 1) ?? 0,
-                                senderNumber = SafeGetInt32(reader, 2, 1) ?? 0,
-                                receiverNumber = SafeGetInt32(reader, 3, 1) ?? 0,
-                                date = reader.GetDateTime(4)
-                            };
+                                transactionId = SafeGetInt32(reader, 0, rowIndex),
+                                amount = SafeGetDecimal(reader, 1, rowIndex) ?? 0,
+                                senderNumber = SafeGetInt32(reader, 2, rowIndex) ?? 0,
+                                receiverNumber = SafeGetInt32(reader, 3, rowIndex) ?? 0,
+                                date = reader.IsDBNull(4) ? DateTime.MinValue : reader.GetDateTime(4)
+
+                            });
+                        }
+                        catch (Exception ex)
+                        {
+                            _log?.Invoke($"{DateTime.UtcNow:o} - Unexpected error mapping row {rowIndex}: {ex}");
+                            // continue reading remaining rows
                         }
                     }
                 }
             }
-            return null;
+            return transactions;
         }
 
         public void AddTransactionHistory(string number, decimal amount, int senderNumber, int receiverNumber, DateTime date)
