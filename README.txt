@@ -12,7 +12,6 @@ right-click all the .resx and click properties. Under the general tab, check the
 
 Debugging: 
 to create a local server click on the server explorer, then follow the instruction of this video:
-[![Video Title](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=Bqy9t9VFG8E)   
 https://www.youtube.com/watch?v=Bqy9t9VFG8E 
 
 if an error occur saying an dllException, install or update the nuget package.
