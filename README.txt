@@ -1,4 +1,5 @@
 Make sure to put the folder in the User Folder\source\repos
+Change the public static string conn to your local server.
 
 The file can be run through .exe and has .dll (no need to open visual studio)
 go to source\repos\SimpleBankingApplication\SimpleBankingApplication\
