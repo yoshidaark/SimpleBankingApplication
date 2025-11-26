@@ -14,8 +14,8 @@ namespace Accounts
         public static int number;
         public static string username, password;
         public static double balance;
-
-        public static string conn = "Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = CloudFundDB; Integrated Security = True; Encrypt = True; Trust Server Certificate = True";
+        //paste your local db here
+        public static string conn = "";
         //make the file path dynamic
         private string filePathAccount = Path.Combine(Directory.GetCurrentDirectory(), "SimpleBankingAccounts.csv");
         private string filePathOTP = Path.Combine(Directory.GetCurrentDirectory(), "OTP.txt");
