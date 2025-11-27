@@ -1,0 +1,17 @@
+--Create Table--
+CREATE TABLE accounts (
+    id INT IDENTITY PRIMARY KEY ,
+    number VARCHAR(20) UNIQUE NOT NULL, 
+    username VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    balance DECIMAL(10, 2) NOT NULL DEFAULT 0.00
+);
+
+--dummy information --
+--will not have a transaction history--
+INSERT INTO accounts (number, username, password, balance) VALUES
+(9812, 'nathan', 'password123', 50000.00),
+(9513, 'jaycee', 'wuwa69', 2500.50), 
+(9784, 'maya', 'hsrluvr67', 10000.75),  
+(9615, 'symon', 'imgay21', 500.00),    
+(9087, 'ivan', 'drakekevinlamar', 8000.25);  
