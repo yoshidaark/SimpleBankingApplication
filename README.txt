@@ -15,4 +15,6 @@ It requires to download necessary packages for the microsoft.sql.client.
 to create a local server click on the server explorer, then follow the instruction of this video:
 https://www.youtube.com/watch?v=Bqy9t9VFG8E 
 
+Enter the queries that is inside the the sqlQuery.txt which is located in the repository.
+
 if an error occur saying an dllException, install or update the nuget package by right-clicking the project and select modify nuget packages.
